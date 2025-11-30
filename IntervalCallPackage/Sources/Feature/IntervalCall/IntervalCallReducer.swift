@@ -12,7 +12,7 @@ public struct IntervalCallReducer: Sendable {
         public var endNumber: Int = 10
         public var intervalSeconds: Double = 1.0
         public var maxCallCount: Int? = nil  // nilの場合はエンドレス
-        public var isRandomMode: Bool = false  // ランダムモード
+        public var isRandomMode: Bool = true  // ランダムモード
 
         // 状態
         public var isRunning: Bool = false
