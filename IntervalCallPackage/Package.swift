@@ -24,6 +24,7 @@ let package = Package(
         .target(
             name: MyModule.core.name,
             dependencies: [
+                ThirdParty.Product.swiftComposableArchitecture.targetDependency,
             ],
             path: MyModule.core.folderPath
         ),
