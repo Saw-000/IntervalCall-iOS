@@ -91,6 +91,9 @@ public struct IntervalCallView: View {
                             }
                         ))
                         .disabled(store.isRunning)
+
+                        Toggle("ランダム読み上げ", isOn: $store.isRandomMode)
+                            .disabled(store.isRunning)
                     }
                 }
                 .scrollDismissesKeyboard(.interactively)
@@ -98,19 +101,23 @@ public struct IntervalCallView: View {
                 // 開始ボタン（固定）
                 VStack {
                     if store.isRunning {
-                        Button("停止", role: .destructive) {
+                        Button {
                             store.send(.stopButtonTapped)
+                        } label: {
+                            Text("停止")
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color(.systemBackground))
                         }
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color(.systemBackground))
                     } else {
-                        Button("開始") {
+                        Button {
                             store.send(.startButtonTapped)
+                        } label: {
+                            Text("開始")
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color(.systemBackground))
                         }
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color(.systemBackground))
                     }
                 }
             }

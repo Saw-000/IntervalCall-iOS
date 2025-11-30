@@ -12,14 +12,15 @@ public struct IntervalCallReducer: Sendable {
         public var endNumber: Int = 10
         public var intervalSeconds: Double = 1.0
         public var maxCallCount: Int? = nil  // nilの場合はエンドレス
+        public var isRandomMode: Bool = false  // ランダムモード
 
         // 状態
         public var isRunning: Bool = false
         public var currentNumber: Int? = nil
         public var callCount: Int = 0
         public var displayText: String = "準備完了"
-        
-        
+
+
 
         public init() {}
     }
@@ -113,9 +114,17 @@ public struct IntervalCallReducer: Sendable {
                 state.callCount += 1
 
                 // 次の数字を計算
-                var nextNumber = current + 1
-                if nextNumber > state.endNumber {
-                    nextNumber = state.startNumber  // 最初に戻る
+                let nextNumber: Int
+                if state.isRandomMode {
+                    // ランダムモード：範囲内からランダムに選択
+                    nextNumber = Int.random(in: state.startNumber...state.endNumber)
+                } else {
+                    // 順次モード：次の数字に進む
+                    var next = current + 1
+                    if next > state.endNumber {
+                        next = state.startNumber  // 最初に戻る
+                    }
+                    nextNumber = next
                 }
                 state.currentNumber = nextNumber
 
