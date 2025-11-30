@@ -98,6 +98,8 @@ public struct IntervalCallReducer: Sendable {
 
             case .speak(let number):
                 state.displayText = "\(number)"
+                state.callCount += 1
+
                 // 実際の読み上げはEffectで処理
                 return .run { @MainActor _ in
                     let utterance = AVSpeechUtterance(string: "\(number)")
@@ -110,8 +112,6 @@ public struct IntervalCallReducer: Sendable {
             case .speakCompleted:
                 guard state.isRunning else { return .none }
                 guard let current = state.currentNumber else { return .none }
-
-                state.callCount += 1
 
                 // 次の数字を計算
                 let nextNumber: Int
