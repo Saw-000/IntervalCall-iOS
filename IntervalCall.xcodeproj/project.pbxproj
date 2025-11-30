@@ -65,13 +65,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C7C570BD2EDC378400A59191 /* Build configuration list for PBXNativeTarget "IntervalCall" */;
 			buildPhases = (
+				C7C571122EDC71D300A59191 /* Copy Acknowledgements */,
+				C7C570B02EDC378200A59191 /* Resources */,
 				C7C570AE2EDC378200A59191 /* Sources */,
 				C7C570AF2EDC378200A59191 /* Frameworks */,
-				C7C570B02EDC378200A59191 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				C7C571142EDC725300A59191 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				C7C570B42EDC378200A59191 /* IntervalCall */,
@@ -108,6 +110,9 @@
 			);
 			mainGroup = C7C570A92EDC378200A59191;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				C7C570FD2EDC6ABD00A59191 /* XCRemoteSwiftPackageReference "LicensePlist" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = C7C570B32EDC378200A59191 /* Products */;
 			projectDirPath = "";
@@ -128,6 +133,27 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		C7C571122EDC71D300A59191 /* Copy Acknowledgements */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Acknowledgements";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"Will copy acknowledgements\"\n\nACKNOWLEDGEMENTS_DIR=${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}/com.mono0926.LicensePlist.Output\nDESTINATION_PATH=${SRCROOT}/${TARGET_NAME}/Settings.bundle/\n\necho \"DESTINATION_PATH: $DESTINATION_PATH\"\n\ncp -r \"${ACKNOWLEDGEMENTS_DIR}\"/* \"${DESTINATION_PATH}\"\nrm -rf \"${ACKNOWLEDGEMENTS_DIR}\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		C7C570AE2EDC378200A59191 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -137,6 +163,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C7C571142EDC725300A59191 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = C7C571132EDC725300A59191 /* LicensePlistBuildTool */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		C7C570BB2EDC378400A59191 /* Debug */ = {
@@ -177,7 +210,7 @@
 				DEVELOPMENT_TEAM = YGS75HLB54;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -239,7 +272,7 @@
 				DEVELOPMENT_TEAM = YGS75HLB54;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -370,10 +403,26 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		C7C570FD2EDC6ABD00A59191 /* XCRemoteSwiftPackageReference "LicensePlist" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mono0926/LicensePlist";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.27.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		C7C570D72EDC3DB500A59191 /* IntervalCallPackage */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = IntervalCallPackage;
+		};
+		C7C571132EDC725300A59191 /* LicensePlistBuildTool */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C7C570FD2EDC6ABD00A59191 /* XCRemoteSwiftPackageReference "LicensePlist" */;
+			productName = "plugin:LicensePlistBuildTool";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

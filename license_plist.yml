@@ -1,0 +1,15 @@
+options:
+  # Xcodeプロジェクトを特定（SwiftPMのPackage.resolvedを取得）
+  xcworkspacePath: "*.xcworkspace"
+
+
+  # 出力ファイルの接頭辞（plistファイル名）
+  prefix: Acknowledgements
+
+
+  # Debug時のみでも常に実行する
+  force: true
+
+
+  # ターミナルを開かない
+  suppressOpeningDirectory: true
