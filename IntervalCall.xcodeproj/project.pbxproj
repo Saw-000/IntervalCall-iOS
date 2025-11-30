@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		C7C570D82EDC3DB500A59191 /* IntervalCallPackage in Frameworks */ = {isa = PBXBuildFile; productRef = C7C570D72EDC3DB500A59191 /* IntervalCallPackage */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		C7C570B22EDC378200A59191 /* IntervalCall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IntervalCall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7C570D82EDC3DB500A59191 /* IntervalCallPackage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -33,6 +38,7 @@
 			isa = PBXGroup;
 			children = (
 				C7C570B42EDC378200A59191 /* IntervalCall */,
+				C7C570D62EDC3DB500A59191 /* Frameworks */,
 				C7C570B32EDC378200A59191 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -43,6 +49,13 @@
 				C7C570B22EDC378200A59191 /* IntervalCall.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		C7C570D62EDC3DB500A59191 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -65,6 +78,7 @@
 			);
 			name = IntervalCall;
 			packageProductDependencies = (
+				C7C570D72EDC3DB500A59191 /* IntervalCallPackage */,
 			);
 			productName = IntervalCall;
 			productReference = C7C570B22EDC378200A59191 /* IntervalCall.app */;
@@ -274,13 +288,15 @@
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				XROS_DEPLOYMENT_TARGET = 26.0;
 			};
 			name = Debug;
@@ -318,13 +334,15 @@
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				XROS_DEPLOYMENT_TARGET = 26.0;
 			};
 			name = Release;
@@ -351,6 +369,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C7C570D72EDC3DB500A59191 /* IntervalCallPackage */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = IntervalCallPackage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C7C570AA2EDC378200A59191 /* Project object */;
 }
