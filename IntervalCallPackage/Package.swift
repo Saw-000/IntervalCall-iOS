@@ -18,19 +18,21 @@ let package = Package(
         ),
     ],
     dependencies: [
-        ThirdParty.Package.swiftComposableArchitecture.dependency,
+        ThirdParty.Package.admob.dependency,
+        ThirdParty.Package.swiftComposableArchitecture.dependency
     ],
     targets: [
         .target(
             name: MyModule.core.name,
             dependencies: [
-                ThirdParty.Product.swiftComposableArchitecture.targetDependency,
+                ThirdParty.Product.swiftComposableArchitecture.targetDependency
             ],
             path: MyModule.core.folderPath
         ),
         .target(
             name: MyModule.featureAds.name,
             dependencies: [
+                ThirdParty.Product.googleMobileAds.targetDependency
             ],
             path: MyModule.featureAds.folderPath
         ),
@@ -88,12 +90,24 @@ enum MyModule {
 struct ThirdParty {
     /** 外部ライブラリパッケージ */
     enum Package {
+        case admob
         case swiftComposableArchitecture
 
         var dependency: PackageDescription.Package.Dependency {
             return switch self {
+            case .admob:
+                .package(url: "https://github.com/googleads/swift-package-manager-google-mobile-ads.git", from: "12.14.0")
             case .swiftComposableArchitecture:
                 .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: "1.23.1")
+            }
+        }
+        
+        var packageName: String {
+            return switch self {
+            case .admob:
+                "swift-package-manager-google-mobile-ads"
+            case .swiftComposableArchitecture:
+                "swift-composable-architecture"
             }
         }
     }
@@ -101,11 +115,14 @@ struct ThirdParty {
     /** 外部ライブラリプロダクト */
     enum Product {
         case swiftComposableArchitecture
+        case googleMobileAds
 
         var targetDependency: Target.Dependency {
             return switch self {
+            case .googleMobileAds:
+                .product(name: "GoogleMobileAds", package: Package.admob.packageName)
             case .swiftComposableArchitecture:
-                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
+                .product(name: "ComposableArchitecture", package: Package.swiftComposableArchitecture.packageName)
             }
         }
     }
