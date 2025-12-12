@@ -29,6 +29,12 @@ let package = Package(
             path: MyModule.core.folderPath
         ),
         .target(
+            name: MyModule.featureAds.name,
+            dependencies: [
+            ],
+            path: MyModule.featureAds.folderPath
+        ),
+        .target(
             name: MyModule.featureApp.name,
             dependencies: [
                 MyModule.featureIntervalCall.dependency,
@@ -52,11 +58,14 @@ enum MyModule {
     case core
     case featureApp
     case featureIntervalCall
+    case featureAds
     
     var folderPath: String {
         return switch self {
         case .core:
             "Sources/Core"
+        case .featureAds:
+            "Sources/Feature/Ads"
         case .featureApp:
             "Sources/Feature/App"
         case .featureIntervalCall:
