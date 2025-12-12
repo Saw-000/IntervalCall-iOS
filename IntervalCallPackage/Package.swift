@@ -9,13 +9,11 @@ let package = Package(
         .iOS(.v26),
     ],
     products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "IntervalCallPackage",
             targets: [
                 MyModule.featureApp.name,
-                MyModule.featureAds.name,
-                
+                MyModule.featureAds.name
             ]
         ),
     ],
@@ -32,6 +30,14 @@ let package = Package(
             path: MyModule.core.folderPath
         ),
         .target(
+            name: MyModule.data.name,
+            dependencies: [
+                ThirdParty.Product.swiftComposableArchitecture.targetDependency,
+                ThirdParty.Product.googleMobileAds.targetDependency
+            ],
+            path: MyModule.data.folderPath
+        ),
+        .target(
             name: MyModule.featureAds.name,
             dependencies: [
                 ThirdParty.Product.googleMobileAds.targetDependency,
@@ -42,6 +48,7 @@ let package = Package(
         .target(
             name: MyModule.featureApp.name,
             dependencies: [
+                MyModule.data.dependency,
                 MyModule.featureAds.dependency,
                 MyModule.featureIntervalCall.dependency,
                 ThirdParty.Product.swiftComposableArchitecture.targetDependency
@@ -62,6 +69,7 @@ let package = Package(
 /// 自作モジュール
 enum MyModule {
     case core
+    case data
     case featureApp
     case featureIntervalCall
     case featureAds
@@ -70,6 +78,8 @@ enum MyModule {
         return switch self {
         case .core:
             "Sources/Core"
+        case .data:
+            "Sources/Data"
         case .featureAds:
             "Sources/Feature/Ads"
         case .featureApp:
