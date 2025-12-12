@@ -13,7 +13,9 @@ let package = Package(
         .library(
             name: "IntervalCallPackage",
             targets: [
-                MyModule.featureApp.name
+                MyModule.featureApp.name,
+                MyModule.featureAds.name,
+                
             ]
         ),
     ],
@@ -32,13 +34,15 @@ let package = Package(
         .target(
             name: MyModule.featureAds.name,
             dependencies: [
-                ThirdParty.Product.googleMobileAds.targetDependency
+                ThirdParty.Product.googleMobileAds.targetDependency,
+                ThirdParty.Product.swiftComposableArchitecture.targetDependency
             ],
             path: MyModule.featureAds.folderPath
         ),
         .target(
             name: MyModule.featureApp.name,
             dependencies: [
+                MyModule.featureAds.dependency,
                 MyModule.featureIntervalCall.dependency,
                 ThirdParty.Product.swiftComposableArchitecture.targetDependency
             ],
