@@ -1,4 +1,6 @@
+import ComposableArchitecture
 import GoogleMobileAds
+import InternalData
 import SwiftUI
 import UIKit
 
@@ -7,17 +9,17 @@ struct AdMobBannerView: UIViewRepresentable {
     typealias UIViewType = BannerView
 
     private let adSize: AdSize
-    private let adUnitID: String
+    
+    @Dependency(\.adsRepository) private var adsRepository: AdsRepository
 
-    init(adSize: AdSize, adUnitID: String) {
+    init(adSize: AdSize) {
         self.adSize = adSize
-        self.adUnitID = adUnitID
     }
 
     func makeUIView(context: Context) -> BannerView {
         let banner = BannerView(adSize: adSize)
         // load_ad
-        banner.adUnitID = adUnitID
+        banner.adUnitID = adsRepository.admobBannerUnitID()
         banner.load(Request())
 
         // set delegate

@@ -19,6 +19,7 @@ let package = Package(
     ],
     dependencies: [
         ThirdParty.Package.admob.dependency,
+        ThirdParty.Package.googleUserMessagingPlatform.dependency,
         ThirdParty.Package.swiftComposableArchitecture.dependency
     ],
     targets: [
@@ -40,7 +41,9 @@ let package = Package(
         .target(
             name: MyModule.featureAds.name,
             dependencies: [
+                MyModule.data.dependency,
                 ThirdParty.Product.googleMobileAds.targetDependency,
+                ThirdParty.Product.googleUserMessagingPlatform.targetDependency,
                 ThirdParty.Product.swiftComposableArchitecture.targetDependency
             ],
             path: MyModule.featureAds.folderPath
@@ -105,12 +108,15 @@ struct ThirdParty {
     /** 外部ライブラリパッケージ */
     enum Package {
         case admob
+        case googleUserMessagingPlatform
         case swiftComposableArchitecture
 
         var dependency: PackageDescription.Package.Dependency {
             return switch self {
             case .admob:
                 .package(url: "https://github.com/googleads/swift-package-manager-google-mobile-ads.git", from: "12.14.0")
+            case .googleUserMessagingPlatform:
+                .package(url: "https://github.com/googleads/swift-package-manager-google-user-messaging-platform.git", from: "3.1.0")
             case .swiftComposableArchitecture:
                 .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: "1.23.1")
             }
@@ -120,6 +126,8 @@ struct ThirdParty {
             return switch self {
             case .admob:
                 "swift-package-manager-google-mobile-ads"
+            case .googleUserMessagingPlatform:
+                "swift-package-manager-google-user-messaging-platform"
             case .swiftComposableArchitecture:
                 "swift-composable-architecture"
             }
@@ -128,13 +136,16 @@ struct ThirdParty {
 
     /** 外部ライブラリプロダクト */
     enum Product {
-        case swiftComposableArchitecture
         case googleMobileAds
+        case googleUserMessagingPlatform
+        case swiftComposableArchitecture
 
         var targetDependency: Target.Dependency {
             return switch self {
             case .googleMobileAds:
                 .product(name: "GoogleMobileAds", package: Package.admob.packageName)
+            case .googleUserMessagingPlatform:
+                .product(name: "GoogleUserMessagingPlatform", package: Package.googleUserMessagingPlatform.packageName)
             case .swiftComposableArchitecture:
                 .product(name: "ComposableArchitecture", package: Package.swiftComposableArchitecture.packageName)
             }

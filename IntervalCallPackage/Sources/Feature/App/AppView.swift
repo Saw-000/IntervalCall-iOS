@@ -13,8 +13,8 @@ public struct AppView: View {
                 IntervalCallView(store: Store(initialState: .init()) { IntervalCallReducer() })
 
                 // バナー広告
-                if let bannerUnitID = store.bannerUnitID {
-                    AnchoredAdaptiveBannerView(adUnitID: bannerUnitID, width: geometry.size.width)
+                if store.canShowBanner {
+                    AnchoredAdaptiveBannerView(width: geometry.size.width)
                 }
             }
         }
