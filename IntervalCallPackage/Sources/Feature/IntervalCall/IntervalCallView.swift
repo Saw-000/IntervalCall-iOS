@@ -1,5 +1,6 @@
 import SwiftUI
 import ComposableArchitecture
+import InternalCore
 
 /// 間隔で読み上げる機能の画面
 public struct IntervalCallView: View {
@@ -94,6 +95,15 @@ public struct IntervalCallView: View {
 
                         Toggle("ランダム読み上げ", isOn: $store.isRandomMode)
                             .disabled(store.isRunning)
+
+                        Picker("他のアプリの音楽", selection: Binding(
+                            get: { store.audioMixMode },
+                            set: { store.send(.audioMixModeChanged($0)) }
+                        )) {
+                            Text("音量を下げる").tag(AudioMixMode.duckOthers)
+                            Text("ミックスする").tag(AudioMixMode.mixWithOthers)
+                        }
+                        .disabled(store.isRunning)
                     }
                 }
                 .scrollDismissesKeyboard(.interactively)

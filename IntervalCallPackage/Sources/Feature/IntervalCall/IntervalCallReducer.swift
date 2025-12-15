@@ -13,6 +13,7 @@ public struct IntervalCallReducer: Sendable {
         public var intervalSeconds: Double = 1.0
         public var maxCallCount: Int? = nil  // nilの場合はエンドレス
         public var isRandomMode: Bool = true  // ランダムモード
+        public var audioMixMode: AudioMixMode = .duckOthers  // オーディオミックスモード
 
         // 状態
         public var isRunning: Bool = false
@@ -30,6 +31,7 @@ public struct IntervalCallReducer: Sendable {
         case endNumberChanged(Int)
         case intervalSecondsChanged(Double)
         case maxCallCountChanged(Int?)
+        case audioMixModeChanged(AudioMixMode)
 
         case startButtonTapped
         case stopButtonTapped
@@ -63,6 +65,12 @@ public struct IntervalCallReducer: Sendable {
             case .maxCallCountChanged(let value):
                 state.maxCallCount = value
                 return .none
+
+            case .audioMixModeChanged(let mode):
+                state.audioMixMode = mode
+                return .run { _ in
+                    speaker.setMixMode(mode)
+                }
 
             case .startButtonTapped:
                 state.isRunning = true
