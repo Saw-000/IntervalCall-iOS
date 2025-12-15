@@ -9,28 +9,50 @@ let package = Package(
         .iOS(.v26),
     ],
     products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "IntervalCallPackage",
             targets: [
-                MyModule.featureApp.name
+                MyModule.featureApp.name,
+                MyModule.featureAds.name
             ]
         ),
     ],
     dependencies: [
-        ThirdParty.Package.swiftComposableArchitecture.dependency,
+        ThirdParty.Package.admob.dependency,
+        ThirdParty.Package.googleUserMessagingPlatform.dependency,
+        ThirdParty.Package.swiftComposableArchitecture.dependency
     ],
     targets: [
         .target(
             name: MyModule.core.name,
             dependencies: [
-                ThirdParty.Product.swiftComposableArchitecture.targetDependency,
+                ThirdParty.Product.swiftComposableArchitecture.targetDependency
             ],
             path: MyModule.core.folderPath
         ),
         .target(
+            name: MyModule.data.name,
+            dependencies: [
+                ThirdParty.Product.swiftComposableArchitecture.targetDependency,
+                ThirdParty.Product.googleMobileAds.targetDependency
+            ],
+            path: MyModule.data.folderPath
+        ),
+        .target(
+            name: MyModule.featureAds.name,
+            dependencies: [
+                MyModule.data.dependency,
+                ThirdParty.Product.googleMobileAds.targetDependency,
+                ThirdParty.Product.googleUserMessagingPlatform.targetDependency,
+                ThirdParty.Product.swiftComposableArchitecture.targetDependency
+            ],
+            path: MyModule.featureAds.folderPath
+        ),
+        .target(
             name: MyModule.featureApp.name,
             dependencies: [
+                MyModule.data.dependency,
+                MyModule.featureAds.dependency,
                 MyModule.featureIntervalCall.dependency,
                 ThirdParty.Product.swiftComposableArchitecture.targetDependency
             ],
@@ -50,13 +72,19 @@ let package = Package(
 /// 自作モジュール
 enum MyModule {
     case core
+    case data
     case featureApp
     case featureIntervalCall
+    case featureAds
     
     var folderPath: String {
         return switch self {
         case .core:
             "Sources/Core"
+        case .data:
+            "Sources/Data"
+        case .featureAds:
+            "Sources/Feature/Ads"
         case .featureApp:
             "Sources/Feature/App"
         case .featureIntervalCall:
@@ -79,24 +107,47 @@ enum MyModule {
 struct ThirdParty {
     /** 外部ライブラリパッケージ */
     enum Package {
+        case admob
+        case googleUserMessagingPlatform
         case swiftComposableArchitecture
 
         var dependency: PackageDescription.Package.Dependency {
             return switch self {
+            case .admob:
+                .package(url: "https://github.com/googleads/swift-package-manager-google-mobile-ads.git", from: "12.14.0")
+            case .googleUserMessagingPlatform:
+                .package(url: "https://github.com/googleads/swift-package-manager-google-user-messaging-platform.git", from: "3.1.0")
             case .swiftComposableArchitecture:
                 .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: "1.23.1")
+            }
+        }
+        
+        var packageName: String {
+            return switch self {
+            case .admob:
+                "swift-package-manager-google-mobile-ads"
+            case .googleUserMessagingPlatform:
+                "swift-package-manager-google-user-messaging-platform"
+            case .swiftComposableArchitecture:
+                "swift-composable-architecture"
             }
         }
     }
 
     /** 外部ライブラリプロダクト */
     enum Product {
+        case googleMobileAds
+        case googleUserMessagingPlatform
         case swiftComposableArchitecture
 
         var targetDependency: Target.Dependency {
             return switch self {
+            case .googleMobileAds:
+                .product(name: "GoogleMobileAds", package: Package.admob.packageName)
+            case .googleUserMessagingPlatform:
+                .product(name: "GoogleUserMessagingPlatform", package: Package.googleUserMessagingPlatform.packageName)
             case .swiftComposableArchitecture:
-                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
+                .product(name: "ComposableArchitecture", package: Package.swiftComposableArchitecture.packageName)
             }
         }
     }

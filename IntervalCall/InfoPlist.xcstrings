@@ -34,6 +34,23 @@
           }
         }
       }
+    },
+    "NSUserTrackingUsageDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This will be used to deliver personalized ads to you."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "許可をすると、あなたに合った広告が表示されます。"
+          }
+        }
+      }
     }
   },
   "version" : "1.1"
