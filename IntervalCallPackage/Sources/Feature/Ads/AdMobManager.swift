@@ -15,8 +15,7 @@ final public class AdMobManager: NSObject, @unchecked Sendable {
     /// 広告を表示可能か
     @MainActor
     public var canRequestAds: Bool {
-//        return ConsentInformation.shared.canRequestAds
-        return false // TODO: AdMobアプリIDが取得できるまでは広告を表示しない。(審査待ち)
+        return ConsentInformation.shared.canRequestAds
     }
     
     /// 1秒ごとに canRequestAds を流すストリーム

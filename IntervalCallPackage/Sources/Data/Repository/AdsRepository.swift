@@ -11,9 +11,10 @@ public struct AdsRepository: Sendable {
 
 extension AdsRepository: DependencyKey {
     private enum Const {
-        // テスト用バナーID（公式サンプル）https://developers.google.com/admob/ios/test-ads?hl=ja#demo_ad_units
+        /// テスト用バナーUnit ID（公式サンプル）https://developers.google.com/admob/ios/test-ads?hl=ja#demo_ad_units
         static let debugAdmobBannerUnitID: String = "ca-app-pub-3940256099942544/2435281174"
-        static let productionAdmobBannerUnitID: String = "本番用バナーID"
+        /// 本番用バナーUnit ID
+        static let productionAdmobBannerUnitID: String = "ca-app-pub-7279710024860495/6673948464"
         
         /// 無効なADFA値(https://developer.apple.com/documentation/adsupport/asidentifiermanager/advertisingidentifier)
         static let invalidADFA: String = "00000000-0000-0000-0000-000000000000"
