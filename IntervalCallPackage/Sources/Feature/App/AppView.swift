@@ -10,7 +10,7 @@ public struct AppView: View {
         GeometryReader { geometry in
             VStack {
                 // 本画面
-                IntervalCallView(store: Store(initialState: .init()) { IntervalCallReducer() })
+                IntervalCallView(store: store.scope(state: \.intervalCall, action: \.intervalCall))
 
                 // バナー広告
                 if store.canShowBanner {
